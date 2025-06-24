@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vida Plus</title>
+  <link rel="stylesheet" href="../Css/style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="logo">Vida Plus</div>
+      <nav class="menu">
+        <a href="../index.html">Início</a>
+        <a href="servicos.html">Serviços</a>
+        <a href="contato.html">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="contato">
+    <h2>Fale Conosco</h2>
+    <p>Entre em contato conosco para dúvidas, sugestões ou agendamentos.</p>
+    <form class="form-group" onsubmit="enviarContato(event)">
+      <div class="form-group">
+        <label for="nome">Nome Completo:</label>
+        <input type="text" id="nome" name="nome" required>
+      </div>
+      <div class="form-group">
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="assunto">Assunto:</label>
+        <select id="assunto" name="assunto" required>
+          <option value="">Selecione um assunto</option>
+          <option value="Dúvida">Dúvida</option>
+          <option value="Sugestão">Sugestão</option>
+          <option value="Agendamento">Agendamento</option>
+          <option value="Reclamação">Reclamação</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="mensagem">Mensagem:</label>
+        <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
+      </div>
+      <button type="submit" class="btn">Enviar</button>
+    </form>
+    <div id="mensagem-feedback" class="mensagem-sucesso" style="display: none;"></div>
+    <div class="contato-info">
+      <p><strong>Endereço:</strong> Rua do Marcos, N:325 - Centro</p>
+      <p><strong>Telefone:</strong> (15) 99751-0502</p>
+      <p><strong>Email:</strong> contato@vidaplus.com</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>© 2025 Vida Plus. Todos os direitos reservados.</p>
+    <p>Estamos em conformidade com a Lei Geral de Proteção de Dados (LGPD). Seus dados são tratados com segurança e responsabilidade.</p>
+    <a href="loginAdmin.html" class="admin-link">Área Administrativa</a>
+  </footer>
+
+  <script src="../Js/contato.js"></script>
+  <script src="../Js/menu.js"></script>
+</body>
+</html>

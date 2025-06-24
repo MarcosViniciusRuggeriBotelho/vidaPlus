@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vida Plus</title>
+  <link rel="stylesheet" href="../Css/style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="logo">Vida Plus</div>
+      <nav class="menu">
+        <a href="../index.html">Início</a>
+        <a href="servicos.html">Serviços</a>
+        <a href="contato.html">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="login-section">
+    <div class="container-login">
+      <div class="login-box">
+        <h2>Login do Médico</h2>
+        <p>Insira suas credenciais para acessar o sistema.</p>
+        <form class="form-group" onsubmit="fazerLoginMedico(event)">
+          <div class="form-group">
+            <label for="crm">CRM:</label>
+            <input type="text" id="crm" name="crm" placeholder="Ex: CRM-SP 123456" required>
+          </div>
+          <div class="form-group">
+            <label for="senha">Senha:</label>
+            <input type="password" id="senha" name="senha" required>
+          </div>
+          <button type="submit" class="btn">Entrar</button>
+        </form>
+        <div id="mensagem-feedback" class="mensagem-sucesso" style="display: none;"></div>
+        <p>Não tem cadastro? <a href="cadastroMedico.html">Cadastre-se aqui</a></p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>© 2025 Vida Plus. Todos os direitos reservados.</p>
+    <p>Estamos em conformidade com a Lei Geral de Proteção de Dados (LGPD). Seus dados são tratados com segurança e responsabilidade.</p>
+    <a href="loginAdmin.html" class="admin-link">Área Administrativa</a>
+  </footer>
+
+  <script src="../Js/loginMedico.js"></script>
+  <script src="../Js/menu.js"></script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagrama Vida Plus</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.2.3/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f3f4f6;
+            overflow: hidden;
+        }
+        #diagramContainer {
+            width: 100%;
+            max-width: 1200px;
+            height: 600px;
+            overflow: auto;
+            border: 1px solid #1e40af;
+            position: relative;
+        }
+        #mermaid {
+            margin: 0 auto;
+        }
+        .controls {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 10;
+        }
+        .controls button {
+            margin-right: 10px;
+            padding: 5px 10px;
+            background-color: #1e40af;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .controls button:hover {
+            background-color: #163a7a;
+        }
+        .title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #1e40af;
+            margin-bottom: 5px;
+        }
+        .subtitle {
+            text-align: center;
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="title">Diagrama Casos de Uso - Vida Plus</div>
+    <div class="subtitle">Desenvolvido por Marcos Vinicius Ruggeri Botelho RU:3648661</div>
+    <div class="controls">
+        <button onclick="zoomIn()">Zoom In</button>
+        <button onclick="zoomOut()">Zoom Out</button>
+        <button onclick="resetZoom()">Resetar</button>
+    </div>
+    <div id="diagramContainer">
+        <div id="mermaid" class="mermaid">
+            graph TD
+            subgraph Sistema_Vida_Plus
+                A[Paciente]
+                B[Medico]
+                C[Administrador]
+                D[Usuário Geral]
+
+                UC1[Fazer Login com CPF]
+                UC2[Cadastrar-se]
+                UC3[Agendar Consulta]
+                UC4[Cancelar Consulta]
+                UC5[Participar de Teleconsulta]
+                UC6[Visualizar Histórico Clínico]
+                UC7[Fazer Login com CRM]
+                UC8[Gerenciar Consultas]
+                UC9[Atualizar Perfil]
+                UC10[Fazer Login]
+                UC11[Gerenciar Cadastros]
+                UC12[Monitorar Internações]
+                UC13[Gerar Relatórios]
+                UC14[Consultar Logs]
+                UC15[Acessar Página Inicial]
+                UC16[Visualizar Serviços]
+                UC17[Enviar Mensagem de Contato]
+                UC18[Autenticar Usuário]
+                UC19[Controlar Vídeo e Áudio]
+                UC20[Enviar Mensagem no Chat]
+                UC21[Encerrar Consulta]
+
+                A --> UC1
+                A --> UC2
+                A --> UC3
+                A --> UC4
+                A --> UC5
+                A --> UC6
+
+                B --> UC7
+                B --> UC2
+                B --> UC8
+                B --> UC5
+                B --> UC9
+
+                C --> UC10
+                C --> UC11
+                C --> UC12
+                C --> UC13
+                C --> UC14
+
+                D --> UC15
+                D --> UC16
+                D --> UC17
+
+                UC1 --> UC18
+                UC7 --> UC18
+                UC10 --> UC18
+                UC5 --> UC19
+                UC5 --> UC20
+                UC5 --> UC21
+
+                classDef actor fill:#1E40AF,stroke:#fff,stroke-width:2px,color:#fff
+                classDef usecase fill:#F3F4F6,stroke:#1e40af,stroke-width:2px
+                class A,B,C,D actor
+                class UC1,UC2,UC3,UC4,UC5,UC6,UC7,UC8,UC9,UC10,UC11,UC12,UC13,UC14,UC15,UC16,UC17,UC18,UC19,UC20,UC21 usecase
+
+                note1[Verifica credenciais e redireciona para o dashboard correspondente.] --> UC18
+                note2[Inclui vídeo, áudio e chat em tempo real.] --> UC5
+            end
+        </div>
+    </div>
+
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+
+        let scale = 1;
+        const container = document.getElementById('diagramContainer');
+        const diagram = document.getElementById('mermaid');
+
+        function zoomIn() {
+            scale += 0.1;
+            applyZoom();
+        }
+
+        function zoomOut() {
+            scale = Math.max(0.1, scale - 0.1);
+            applyZoom();
+        }
+
+        function resetZoom() {
+            scale = 1;
+            applyZoom();
+        }
+
+        function applyZoom() {
+            diagram.style.transform = `scale(${scale})`;
+            diagram.style.transformOrigin = '0 0';
+            container.scrollLeft = (container.scrollWidth * scale - container.clientWidth) / 2;
+            container.scrollTop = (container.scrollHeight * scale - container.clientHeight) / 2;
+        }
+    </script>
+</body>
+</html>

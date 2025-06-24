@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vida Plus</title>
+  <link rel="stylesheet" href="../Css/style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="logo">Vida Plus</div>
+      <nav class="menu">
+        <a href="../index.html">Início</a>
+        <a href="servicos.html">Serviços</a>
+        <a href="contato.html">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="dashboard">
+    <h2>Consulta por Telemedicina</h2>
+    <p>Você está em atendimento com o médico <span id="medicoNome">Dr. Marcos Vinicius</span>.</p>
+    <div class="telemedicina-container">
+      <div class="video-consulta">
+        <h3>Vídeo do Médico</h3>
+        <video id="video-medico-paciente" autoplay playsinline class="video-box"></video>
+        <div class="video-controls">
+          <button class="btn" onclick="toggleVideo('video-medico-paciente', this)" aria-label="Ativar/Desativar vídeo do médico">Desativar Vídeo</button>
+          <button class="btn" onclick="toggleAudio(this)" aria-label="Ativar/Desativar áudio">Desativar Áudio</button>
+        </div>
+      </div>
+      <div class="video-consulta">
+        <h3>Sua Câmera</h3>
+        <video id="video-paciente-self" autoplay playsinline class="video-box" muted></video>
+        <div class="video-controls">
+          <button class="btn" onclick="toggleVideo('video-paciente-self', this)" aria-label="Ativar/Desativar sua câmera">Desativar Vídeo</button>
+          <button class="btn" onclick="toggleAudio(this)" aria-label="Ativar/Desativar seu microfone">Desativar Áudio</button>
+        </div>
+      </div>
+    </div>
+    <div class="chat-consulta">
+      <h3>Chat da Consulta</h3>
+      <div class="chat-mensagens" id="chat-mensagens-paciente" role="log" aria-live="polite">
+        <p class="medico">Médico: Boa tarde, paula. Como está se sentindo?</p>
+        <p class="paciente">Paciente: Estou com dor de cabeça há dias.</p>
+        <p class="paciente">Paciente: teria algum medicamento?.</p>
+      </div>
+      <form class="chat-form" onsubmit="enviarMensagem('paciente', event)">
+        <input type="text" id="mensagem-paciente" placeholder="Digite sua mensagem" required>
+        <button type="submit" class="btn" aria-label="Enviar mensagem no chat">Enviar</button>
+      </form>
+    </div>
+    <button class="btn" onclick="encerrarConsulta('dashboardPaciente.html')" aria-label="Encerrar a consulta de telemedicina">Encerrar Consulta</button>
+    <div id="mensagem-feedback-paciente" class="mensagem-sucesso" style="display: none;"></div>
+  </section>
+
+  <footer class="footer">
+    <p>© 2025 Vida Plus. Todos os direitos reservados.</p>
+    <p>Em conformidade com a LGPD. Seus dados são tratados com segurança e responsabilidade.</p>
+    <a href="loginAdmin.html" class="admin-link">Área Administrativa</a>
+  </footer>
+
+  <script src="../Js/telemedicina.js"></script>
+  <script src="../Js/menu.js"></script>
+</body>
+</html>

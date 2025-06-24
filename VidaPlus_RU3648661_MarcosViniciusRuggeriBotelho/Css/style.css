@@ -1,0 +1,785 @@
+
+/* Variáveis de cores */
+:root {
+  --primary: #1E40AF; /* Azul escuro */
+  --secondary: #047857; /* Verde escuro */
+  --accent: #B45309; /* Âmbar escuro */
+  --bg-body: #F3F4F6; /* Cinza claro */
+  --text-dark: #1E293B; /* Azul escuro */
+  --white: #FFFFFF; /* Branco */
+  --border: #E5E7EB; /* Cinza claro */
+  --success-bg: #b2ebf2; /* Ajustado para combinar com JS */
+  --success-text: #1d3557; /* Ajustado para combinar com JS */
+  --error-bg: #f8d7da; /* Ajustado para combinar com JS */
+  --error-text: #721c24; /* Ajustado para combinar com JS */
+  --shadow: rgba(0, 0, 0, 0.1);
+  --notification-success: #10B981; /* Verde para sucesso */
+  --notification-error: #EF4444; /* Vermelho para erro */
+  --notification-info: #3B82F6; /* Azul para info */
+}
+
+/* Modo escuro */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-body: #1E293B;
+    --text-dark: #F3F4F6;
+    --white: #2D3748;
+    --primary: #60A5FA;
+    --secondary: #34D399;
+    --accent: #FBBF24;
+    --border: #4B5563;
+    --success-bg: #1d3557;
+    --success-text: #b2ebf2;
+    --error-bg: #721c24;
+    --error-text: #f8d7da;
+    --shadow: rgba(0, 0, 0, 0.3);
+    --notification-success: #34D399;
+    --notification-error: #F87171;
+    --notification-info: #60A5FA;
+  }
+}
+
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', 'Helvetica', sans-serif;
+  background-color: var(--bg-body);
+  color: var(--text-dark);
+  line-height: 1.7;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Cabeçalho */
+.header {
+  background-color: var(--white);
+  box-shadow: 0 3px 12px var(--shadow);
+  padding: 20px 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.container {
+  width: 92%;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espaçamento entre o logo e o texto */
+}
+
+.logo::before {
+  content: '';
+  background-image: url('../images/logo.png'); /* Caminho para a imagem */
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 40px; /* Tamanho do logo, ajuste conforme necessário */
+  height: 40px;
+  display: inline-block;
+}
+
+.menu {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.menu a {
+  text-decoration: none;
+  color: var(--primary);
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.menu a:hover,
+.menu a:focus-visible {
+  color: var(--secondary);
+  transform: scale(1.05);
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.menu a.sair {
+  color: var(--accent);
+}
+
+.menu a.sair:hover,
+.menu a.sair:focus-visible {
+  color: darken(var(--accent), 10%);
+}
+
+.banner {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: var(--white);
+  padding: 80px 20px;
+  text-align: center;
+  border-bottom: 4px solid var(--primary);
+}
+
+.banner h2 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+/* Galeria de Hospital */
+.hospital-gallery {
+  padding: 60px 20px;
+  background-color: var(--white);
+  text-align: center;
+}
+
+.hospital-gallery h2 {
+  margin-bottom: 35px;
+  color: var(--primary);
+  font-size: 2rem;
+}
+
+.gallery-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+}
+
+.gallery-item {
+  flex: 1 1 400px;
+  max-width: 100%;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%; /* Garante que a imagem ocupe toda a altura do container */
+  object-fit: cover; /* Preenche o espaço, cortando ou esticando se necessário */
+  display: block;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.gallery-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  padding: 20px;
+  text-align: center;
+}
+
+.gallery-item:hover .gallery-overlay {
+  opacity: 1;
+}
+
+.gallery-overlay h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.gallery-overlay p {
+  font-size: 1rem;
+  color: var(--white);
+}
+
+/* Dashboard */
+.dashboard {
+  padding: 3rem 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.dashboard h2 {
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: var(--primary);
+  font-size: 2rem;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2.5rem;
+}
+
+.dashboard-card {
+  background-color: var(--white);
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 4px 16px var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeInCard 0.5s ease-out;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 6px 20px var(--shadow);
+}
+
+.dashboard-card i {
+  font-size: 2.5rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.dashboard-card h3 {
+  margin-bottom: 0.5rem;
+  color: var(--text-dark);
+  font-size: 1.5rem;
+}
+
+.dashboard-card p {
+  color: var(--text-dark);
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.admin-dashboard .dashboard-card {
+  border-left: 4px solid var(--primary); /* Borda azul para administrador */
+}
+
+.patient-dashboard .dashboard-card {
+  border-left: 4px solid var(--secondary); /* Borda verde para paciente */
+}
+
+.doctor-dashboard .dashboard-card {
+  border-left: 4px solid var(--accent); /* Borda âmbar para médico */
+}
+
+@keyframes fadeInCard {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.notifications {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 300px;
+}
+
+.notification {
+  background-color: var(--white);
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px var(--shadow);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  animation: slideIn 0.3s ease-out;
+  cursor: pointer;
+}
+
+.notification.success {
+  border-left: 4px solid var(--notification-success);
+  color: var(--success-text);
+}
+
+.notification.error {
+  border-left: 4px solid var(--notification-error);
+  color: var(--error-text);
+}
+
+.notification.info {
+  border-left: 4px solid var(--notification-info);
+  color: var(--text-dark);
+}
+
+.notification .close {
+  font-size: 1.2rem;
+  color: var(--text-dark);
+  cursor: pointer;
+}
+
+.notification .close:hover {
+  color: var(--accent);
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeOut {
+  to { opacity: 0; }
+}
+
+/* Login e Seções */
+.login-section {
+  padding: 60px 20px;
+  background-color: var(--white);
+}
+
+.container-login {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 35px;
+  justify-content: center;
+}
+
+.login-box {
+  background-color: var(--white);
+  padding: 35px 25px;
+  flex: 1 1 340px;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px var(--shadow);
+  text-align: center;
+  transition: transform 0.3s ease;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.login-box:hover {
+  transform: translateY(-5px);
+}
+
+.login-box h3 {
+  color: var(--primary);
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--primary);
+  outline: none;
+}
+
+/* Botões */
+.btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 14px 28px;
+  background-color: var(--primary);
+  color: var(--white);
+  text-decoration: none;
+  border-radius: 10px;
+  border: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  position: relative;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  background-color: darken(var(--primary), 10%);
+  transform: translateY(-3px);
+  outline: none;
+}
+
+.btn.loading {
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.btn.loading::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--white);
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.servicos {
+  padding: 70px 20px;
+  background-color: var(--white);
+  text-align: center;
+}
+
+.servico-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 35px;
+}
+
+.servico-box {
+  background-color: var(--bg-body);
+  padding: 30px;
+  flex: 1 1 300px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px var(--shadow);
+  transition: transform 0.3s ease;
+}
+
+.servico-box:hover {
+  transform: translateY(-5px);
+}
+
+.telemedicina-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 2.5rem;
+  margin-top: 35px;
+}
+
+.video-consulta {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+  min-width: 320px;
+}
+
+.video-box {
+  background-color: var(--white);
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  font-size: 1.3rem;
+  color: var(--text-dark);
+  position: relative;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.video-box::after {
+  content: '▶';
+  font-size: 2.5rem;
+  color: var(--primary);
+  opacity: 0.8;
+  position: absolute;
+}
+
+.video-controls {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.chat-consulta {
+  flex: 1;
+  min-width: 320px;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-mensagens {
+  background-color: var(--white);
+  border: 2px solid var(--border);
+  height: 240px;
+  padding: 12px;
+  overflow-y: auto;
+  margin-bottom: 12px;
+  border-radius: 12px;
+}
+
+.chat-mensagens p {
+  display: block;
+  margin: 6px 0;
+  padding: 10px 14px;
+  border-radius: 8px;
+}
+
+.chat-mensagens p.paciente {
+  background-color: var(--success-bg);
+  color: var(--success-text);
+  align-self: flex-start;
+  max-width: 75%;
+}
+
+.chat-mensagens p.medico {
+  background-color: var(--primary);
+  color: var(--white);
+  align-self: flex-end;
+  margin-left: auto;
+  max-width: 75%;
+}
+
+.chat-form {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.chat-form input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 2px solid var(--border);
+  font-size: 1rem;
+}
+
+.chat-form button {
+  padding: 10px 14px;
+}
+
+.consultas-box {
+  margin-top: 20px;
+}
+
+.consultas-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  text-align: left;
+}
+
+.consultas-table th,
+.consultas-table td {
+  padding: 12px;
+  border: 2px solid var(--border);
+}
+
+.consultas-table th {
+  background-color: var(--bg-body);
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+.cancelar-btn {
+  padding: 6px 12px;
+  font-size: 0.95rem;
+  background-color: var(--accent);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cancelar-btn:hover,
+.cancelar-btn:focus-visible {
+  background-color: darken(var(--accent), 10%);
+}
+
+/* Mensagem de feedback */
+.mensagem-sucesso {
+  background-color: var(--success-bg);
+  color: var(--success-text);
+  padding: 12px 18px;
+  border: 2px solid var(--success-text);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  font-weight: 600;
+  display: none;
+  animation: fadeIn 0.5s ease-out;
+  box-shadow: 0 2px 8px var(--shadow);
+}
+
+.mensagem-sucesso[style*="error"] {
+  background-color: var(--error-bg);
+  color: var(--error-text);
+  border: 2px solid var(--error-text);
+}
+
+.contato {
+  background-color: var(--white);
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.contato h2 {
+  margin-bottom: 25px;
+  color: var(--primary);
+  font-size: 2rem;
+}
+
+.contato-info {
+  margin-top: 30px;
+  font-size: 1.1rem;
+  color: var(--text-dark);
+}
+
+.footer {
+  background-color: var(--text-dark);
+  padding: 25px;
+  text-align: center;
+  color: var(--white);
+  border-top: 3px solid var(--border);
+  margin-top: auto;
+}
+
+.footer a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer a:hover,
+.footer a:focus-visible {
+  color: var(--secondary);
+  text-decoration: underline;
+}
+
+/* Responsividade */
+@media (max-width: 767px) {
+  .container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .menu {
+    margin-top: 12px;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+    opacity: 0;
+  }
+
+  #menu-toggle:checked ~ .menu {
+    max-height: 300px;
+    opacity: 1;
+    display: flex;
+  }
+
+  .header::before {
+    content: '☰';
+    font-size: 1.8rem;
+    color: var(--primary);
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  #menu-toggle:checked ~ .header::before {
+    content: '✖';
+    transform: rotate(90deg);
+  }
+
+  #menu-toggle {
+    display: none;
+  }
+
+  .banner h2 {
+    font-size: 1.8rem;
+  }
+
+  .telemedicina-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .video-consulta,
+  .chat-consulta {
+    min-width: 100%;
+  }
+
+  .dashboard h2,
+  .contato h2,
+  .hospital-gallery h2 {
+    font-size: 1.6rem;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    font-size: 1.1rem;
+  }
+
+  .btn {
+    padding: 12px 24px;
+    font-size: 1rem;
+  }
+
+  .logo {
+    margin-top: 40px; /* Ajuste para evitar sobreposição com o checkbox em telas menores */
+  }
+
+  .gallery-item {
+    flex: 1 1 100%; /* Stack em uma única coluna em telas menores */
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr; /* Stack em uma coluna em telas menores */
+  }
+}
+
+/* Estilização da label do menu hambúrguer */
+.menu-toggle-label {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  z-index: 11;
+}
